@@ -58,8 +58,8 @@ class Star extends Shape
     /**
      * This acts as the constructor of the class.
      *
-     * @param Point $center the center of the Star.
-     * @param ShapeStyle $style the style of the Star.
+     * @param Point $center the center of the Star
+     * @param ShapeStyle $style the style of the Star
      */
     public function __construct(Point $center, ShapeStyle $style)
     {
