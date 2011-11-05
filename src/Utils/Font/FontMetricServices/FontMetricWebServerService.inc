@@ -31,9 +31,7 @@ class FontMetricWebServerService extends FontMetricService
     }
 
     /**
-     * This method starts a call back HTTP server, waits for and consumes exactly one request to extract and add a font definition, and stops therafter.
-     *
-     * This method expects the request to be a valid \Utils\Http\HttpRequest which contains a valid font definition.
+     * This method creates HTML and Javascript which is evaluated bz the browser, and then feeds back font metrics to the script.
      *
      * @param TextStyle $textStyle the text style for which the font definition is needed
      * @param FontManager $fontManager the font manager to which the font definition is added to

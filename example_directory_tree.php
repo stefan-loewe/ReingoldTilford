@@ -84,7 +84,7 @@ function getFontMetric(TextStyle $textStyle)
 {
     $currentUrl = Url::createCurrentUrlFromServerInfo();
 
-    $endpointUrl = $currentUrl->setPath(str_replace('example_http.php', 'FontManagerServiceEndpoint.php', $currentUrl->getPath()));
+    $endpointUrl = $currentUrl->setPath(str_replace('example_directory_tree.php', 'FontManagerServiceEndpoint.php', $currentUrl->getPath()));
 
     $fontManager = new FontManager(FontMetricServiceFactory::createFontMetricService($endpointUrl));
 
