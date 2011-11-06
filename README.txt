@@ -42,7 +42,7 @@ How to use ReingoldTilford?
 Point your web browser to the examples in the bin folder: 
 
 Visualisation of the directory structure of this package
-- http://localhost/ReingoldTilford//bin/example_directory_tree.php
+- http://localhost/ReingoldTilford/bin/example_directory_tree.php
 
 Visualisation of the DOM structure of http://www.phpclasses.org/ (or any other website if you customize the example)
 - http://localhost/ReingoldTilford/bin/example_DOM.php
