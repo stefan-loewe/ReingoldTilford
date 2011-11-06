@@ -3,7 +3,7 @@
 namespace ReingoldTilford\Models;
 
 /**
- * This class acts as ITreeModel implementation for the TreeNode class (@see Lib\TreeNode), so this can be used with ReingoldTilford algorithm.
+ * This class acts as TreeModel implementation for the PHP's DOMNode class, so this can be used with ReingoldTilford algorithm.
  */
 class DomTreeModel extends TreeModel
 {
