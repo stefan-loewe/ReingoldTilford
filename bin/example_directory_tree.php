@@ -53,7 +53,7 @@ $style->shapeStyle->setHeight($metric->getMaxHeight($basenames));
 $algorithm  = new ReingoldTilfordAlgorithm();
 
 // get the model for the root directory, so that the algorithm can traverse it
-$model      = new FSTreemodel($rootDirectory);
+$model      = new FSTreeModel($rootDirectory);
 
 // get the layout of the tree
 $layout     = $algorithm->getLayout($model, $style->orientation)->normalize();
