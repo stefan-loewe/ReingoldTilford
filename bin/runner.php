@@ -26,7 +26,7 @@ use Utils\Font\FontMetricServices\FontMetricServiceFactory;
 use Utils\URL\Url;
 use Utils\Logging\Logger;
 
-require_once 'bootstrap.inc';
+require_once '../app/bootstrap.inc';
 
 /*
  * TODO: keine verschiedenen Panes explizit erzeugen, sondern eine allgemeine, und dort Primitive hinzufügen, dann pane->save(HTML)->save(PNG);

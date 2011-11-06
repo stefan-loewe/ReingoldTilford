@@ -1,11 +1,16 @@
 <?php
 
+/**
+ * This script is the AJAX service endpoint of the FontMetricWebServerService.
+ * There is no use in calling this script directly, neither by a web server nor through cli.
+ */
+
 use Utils\Autoload\Autoloader;
 use Utils\Graphics2D\Shapes\Styles\TextStyle;
 use Utils\Font\FontManager;
 use Utils\Font\FontMetric;
 
-require_once 'bootstrap.inc';
+require_once '../app/bootstrap.inc';
 
 $result = '';
 

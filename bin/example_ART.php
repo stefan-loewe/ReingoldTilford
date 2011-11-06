@@ -15,7 +15,7 @@ use ReingoldTilford\Styles\TreeStyle;
 use Utils\Graphics2D\DrawingPanes\SvgDrawingPane;
 use Utils\Geom\Dimension;
 
-require_once 'bootstrap.inc';
+require_once '../app/bootstrap.inc';
 
 $start = microtime(TRUE);
 
@@ -23,9 +23,9 @@ if(!isset($argv[1]))
     $argv[1] = 'ART_huge.dot';
 
 $argv[1] = 'ART_small.dot';
-$argv[1] = 'ART.dot';
+//$argv[1] = 'ART.dot';
 
-$transformer = new DotTransformer($argv[1]);
+$transformer = new DotTransformer('../'.$argv[1]);
 
 $root = $transformer->transform();
 

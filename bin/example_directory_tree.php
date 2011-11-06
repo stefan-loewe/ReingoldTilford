@@ -26,7 +26,7 @@ if(PHP_SAPI === 'cli')
     exit(-1);
 }
 
-require_once 'bootstrap.inc';
+require_once '../app/bootstrap.inc';
 
 // get the directory information
 $rootDirectory = new Directory(new SplFileInfo(INSTALLATION_FOLDER));

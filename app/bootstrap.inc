@@ -1,6 +1,6 @@
 <?php
 
-define('INSTALLATION_FOLDER', str_replace('\\', '/', realpath(__DIR__)));
+define('INSTALLATION_FOLDER', str_replace('\\', '/', realpath(__DIR__.'/..')));
 
 define('SOURCE_FOLDER', INSTALLATION_FOLDER.'/src');
 
