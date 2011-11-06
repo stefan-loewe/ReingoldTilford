@@ -155,7 +155,7 @@ class ImagickDrawingPane extends ImageDrawingPane
         $this->draw->setFontSize($this->fontSize);
         $this->draw->setFillColor($this->toImagikColor($this->fontColor));
 
-        $this->document->annotateImage($this->draw, $topLeftCorner->x, $topLeftCorner->y + $this->fontSize, 0, $text.'dasdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdflfs');
+        $this->document->annotateImage($this->draw, $topLeftCorner->x, $topLeftCorner->y + $this->fontSize, 0, $text);
 
         $this->draw->setStrokeWidth($this->strokeWidth);
         $this->draw->setFillColor($this->toImagikColor($this->fillColor));

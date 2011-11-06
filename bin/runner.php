@@ -1,8 +1,8 @@
 <?php
 
 use Utils\Autoload\Autoloader;
-use Lib\TreeNode;
-use Lib\DotTransformer;
+use Utils\Tree\TreeNode;
+use Utils\Tree\DotTransformer;
 use ReingoldTilford\Models\ITreeModel;
 use ReingoldTilford\Models\TreeNodeTreeModel;
 use ReingoldTilford\Models\FSTreeModel;
@@ -52,8 +52,8 @@ Logger::setLogLevel(Logger::OFF);
 
 $type = 'FileSystem';
 //$type = 'JSON';
-$type = 'DOT';
-//$type = '';
+//$type = 'DOT';
+$type = '';
 
 //write example with minimal dependecies!
 
@@ -75,23 +75,23 @@ $style = new TreeStyle();
 
 $strings = getStrings($root, $type);
 
-$metric = getFontMetric($style->textStyle);
+//$metric = getFontMetric($style->textStyle);
 
 //extract modules für PHPLint ..?
 
-$style->shapeStyle->setWidth($metric->getMaxWidth($strings));
-$style->shapeStyle->setHeight($metric->getMaxHeight($strings));
+//$style->shapeStyle->setWidth($metric->getMaxWidth($strings));
+//$style->shapeStyle->setHeight($metric->getMaxHeight($strings));
 
 $dimension = $layout->getDimension($style);
 
 $plotter = new Plotter($model, $layout, null, null, null);
 
 $doExport = array();
-$doExport['GD']       = 0;
-$doExport['GIF']      = 0;
-$doExport['JPG']      = 0;
-$doExport['PNG']      = 0;
-$doExport['IMAGICK']  = 0;
+$doExport['GD']       = 1;
+$doExport['GIF']      = 1;
+$doExport['JPG']      = 1;
+$doExport['PNG']      = 1;
+$doExport['IMAGICK']  = 1;
 $doExport['SVG']      = 1;
 $doExport['HTML']     = 0;
 $doExport['MAP']      = 0;
@@ -390,7 +390,7 @@ function getRoot($type = null)
 
         $root->expand(  function($current, $key, $innerIterator)
                 {
-                    return strpos($current->getFilename(), '.') !== 0;
+                    return true;
                 });
     }
 
@@ -414,7 +414,7 @@ function getRoot($type = null)
     {
         $root = new TreeNode('ROOT');
 
-        if(true)
+        if(!true)
         {
             $tree = unserialize(file_get_contents('tree.ser'));
             $root = $tree[0];
