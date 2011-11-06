@@ -40,7 +40,9 @@ $basenames  = getFilenames($rootDirectory);
 // get the default style for a tree
 $style      = new TreeStyle();
 
-// get the respective font metric
+// get the respective font metric, to be able to determine the maximal string length
+// this uses the Browser's rendering engine plus an AJAX call - which might fail
+// see FontManager::createFontMetric and subsequent calls for more information
 $metric     = getFontMetric($style->textStyle);
 
 // set the width and height of the nodes of the tree

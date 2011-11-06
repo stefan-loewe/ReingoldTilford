@@ -83,7 +83,7 @@ class FontManager
      */
     private function getFontMetricsPath()
     {
-        return __DIR__.DIRECTORY_SEPARATOR.$this->fontMetricsFileName;
+        return DATA_FOLDER.'/'.$this->fontMetricsFileName;
     }
 
     /**
