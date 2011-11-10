@@ -19,7 +19,7 @@ use Utils\Font\FontManager;
 use Utils\Font\FontMetricServices\FontMetricServiceFactory;
 use Utils\URL\Url;
 
-require_once '../app/bootstrap.inc';
+require_once __DIR__.'/../app/bootstrap.inc';
 
 // get the directory information
 $rootDirectory = new Directory(new SplFileInfo(INSTALLATION_FOLDER));

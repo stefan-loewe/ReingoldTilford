@@ -10,7 +10,7 @@ use Utils\Graphics2D\Shapes\Styles\TextStyle;
 use Utils\Font\FontManager;
 use Utils\Font\FontMetric;
 
-require_once '../app/bootstrap.inc';
+require_once __DIR__.'/../app/bootstrap.inc';
 
 $result = '';
 

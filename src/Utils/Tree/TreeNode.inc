@@ -65,12 +65,14 @@ class TreeNode implements \IteratorAggregate
         for($i = 1; $i < $size; $i++)
         {
             // pick a random parent among the nodes already inserted ...
-            $parentIndex = array_rand($index);
+            $parentIndex = mt_rand(0, $i - 1);
             /*
              * for more height: if the parent is the root, try again
             if($parentIndex === 0)
                 $parentIndex = array_rand($index);*/
             $parent = $index[$parentIndex];
+
+            $maxDegree = (mt_rand(0, 1000) % 1000 == 0) ? 2 : 1;
 
             // ... and add it to the parent if the parent has not yet at least $maxDegree children, ...
             if($maxDegree == 0 || $parent->getDegree() < $maxDegree)
@@ -82,6 +84,9 @@ class TreeNode implements \IteratorAggregate
             // ... otherwise, revert and try to pick a new one
             else
                 $i = $i - 1;
+
+            if($i % 1000 === 0)
+                echo "\ndone with first ".$i." nodes";
         }
         return $index;
     }

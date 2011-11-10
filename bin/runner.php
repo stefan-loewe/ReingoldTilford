@@ -26,7 +26,7 @@ use Utils\Font\FontMetricServices\FontMetricServiceFactory;
 use Utils\URL\Url;
 use Utils\Logging\Logger;
 
-require_once '../app/bootstrap.inc';
+require_once __DIR__.'/../app/bootstrap.inc';
 
 /*
  * TODO: keine verschiedenen Panes explizit erzeugen, sondern eine allgemeine, und dort Primitive hinzufügen, dann pane->save(HTML)->save(PNG);
@@ -50,6 +50,13 @@ require_once '../app/bootstrap.inc';
 
 Logger::setLogLevel(Logger::OFF);
 
+ini_set('memory_limit', '4294967296');
+
+set_time_limit(0);
+
+error_reporting(E_ALL | E_STRICT);
+
+
 $type = 'FileSystem';
 //$type = 'JSON';
 //$type = 'DOT';
@@ -69,7 +76,9 @@ if($root instanceof FileSystemObject)
 else
     $model = new TreeNodeTreeModel($root);
 
+$startLayout = microtime(true);
 $layout = $algorithm->getLayout($model, TreeStyle::CENTERED)->normalize();
+echo "\n".'gotLayout in: '.(microtime(true) - $startLayout);
 
 $style = new TreeStyle();
 
@@ -82,16 +91,19 @@ $strings = getStrings($root, $type);
 //$style->shapeStyle->setWidth($metric->getMaxWidth($strings));
 //$style->shapeStyle->setHeight($metric->getMaxHeight($strings));
 
-$dimension = $layout->getDimension($style);
 
+$startPlot = microtime(true);
+$dimension = $layout->getDimension($style);
 $plotter = new Plotter($model, $layout, null, null, null);
+echo "\n".'gotPlot in: '.(microtime(true) - $startPlot);
+
 
 $doExport = array();
-$doExport['GD']       = 1;
-$doExport['GIF']      = 1;
-$doExport['JPG']      = 1;
-$doExport['PNG']      = 1;
-$doExport['IMAGICK']  = 1;
+$doExport['GD']       = 0;
+$doExport['GIF']      = 0;
+$doExport['JPG']      = 0;
+$doExport['PNG']      = 0;
+$doExport['IMAGICK']  = 0;
 $doExport['SVG']      = 1;
 $doExport['HTML']     = 0;
 $doExport['MAP']      = 0;
@@ -191,7 +203,12 @@ if($doExport['HTML'])
 
                 '</style>';
 
-    $plotter->export($style, $doc = new HtmlDrawingPane($dimension));
+    $plotter->plot($style, $doc = new HtmlDrawingPane($dimension));
+
+    if(!isset($_POST))
+	$_POST = array();
+
+    $points = array();
 
     foreach($_POST as $edge)
         $points = array($layout->getPosition($edge[0], $style)->moveBy(new Point(0, 4)),
@@ -199,7 +216,8 @@ if($doExport['HTML'])
                     $layout->getPosition($edge[1], $style)->moveBy(new Point(-15, 4)),
                     $layout->getPosition($edge[1], $style)->moveBy(new Point(0, 4)));
 
-    $doc->drawPolyLine(new \ArrayObject($points));
+    if(count($points) > 0)
+      $doc->drawPolyLine(new \ArrayObject($points));
 
     $export .= $doc->save();
 
@@ -422,7 +440,9 @@ function getRoot($type = null)
         else
         {
             //$root->populateRandomly(1000, 20);
-            file_put_contents('tree.ser', serialize($root->populateRandomly(100, 2)));
+            echo "\n creating tree ...";
+            file_put_contents('tree.ser', serialize($root->populateRandomly(100000, 2)));
+            echo "\ndone!";
         }
     }
 

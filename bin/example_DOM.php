@@ -15,7 +15,7 @@ use Utils\Graphics2D\DrawingPanes\SvgDrawingPane;
 use Utils\Geom\Dimension;
 use Utils\Color\RgbColor;
 
-require_once '../app/bootstrap.inc';
+require_once __DIR__.'/../app/bootstrap.inc';
 
 header("Content-type: image/svg+xml");
 
