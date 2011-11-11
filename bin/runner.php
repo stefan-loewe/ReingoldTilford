@@ -441,7 +441,7 @@ function getRoot($type = null)
         {
             //$root->populateRandomly(1000, 20);
             echo "\n creating tree ...";
-            file_put_contents('tree.ser', serialize($root->populateRandomly(100000, 2)));
+            file_put_contents('tree.ser', serialize($root->populateRandomly(16000, 2)));
             echo "\ndone!";
         }
     }
