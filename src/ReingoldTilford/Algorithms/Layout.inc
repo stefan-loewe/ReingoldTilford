@@ -47,7 +47,7 @@ class Layout implements \Iterator
         if($minXPoint !== null)
         {
             foreach($this->coordinates as $node)
-                $this->coordinates[$node] = $this->coordinates[$node]->moveBy(new Point(-$minXPoint->x, 0));
+                $this->coordinates[$node] = $this->coordinates[$node]->moveBy(new Dimension(-$minXPoint->x, 0));
         }
 
         return $this;

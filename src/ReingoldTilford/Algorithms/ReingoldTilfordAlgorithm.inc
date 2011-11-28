@@ -3,6 +3,7 @@
 namespace ReingoldTilford\Algorithms;
 
 use Utils\Geom\Point;
+use Utils\Geom\Dimension;
 use ReingoldTilford\Algorithms\Layout;
 use ReingoldTilford\Models\ITreeModel;
 use ReingoldTilford\Styles\TreeStyle;
@@ -419,7 +420,7 @@ class ReingoldTilfordAlgorithm
         foreach($this->getPreOrderEnumeration() as $node)
         {
             if($node !== $this->root)
-                $offsets[$node] = $offsets[$this->parents[$node]]->moveBy(new Point($this->offsets[$node], 1));
+                $offsets[$node] = $offsets[$this->parents[$node]]->moveBy(new Dimension($this->offsets[$node], 1));
         }
 
         return new Layout($offsets);
