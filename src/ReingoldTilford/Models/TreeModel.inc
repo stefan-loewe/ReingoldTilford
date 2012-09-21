@@ -55,6 +55,6 @@ abstract class TreeModel implements ITreeModel
      */
     public function getLabel($node)
     {
-        return '';
+        return $node->getData();
     }
 }
