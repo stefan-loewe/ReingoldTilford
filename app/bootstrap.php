@@ -10,10 +10,12 @@ define('SOURCE_FOLDER', INSTALLATION_FOLDER.'/src');
 define('DATA_FOLDER', INSTALLATION_FOLDER.'/data');
 
 // load the class of the autoloader statically
-require_once SOURCE_FOLDER.'/Utils/Autoload/Autoloader.inc';
+require_once INSTALLATION_FOLDER.'/../Utils/src/ws/loewe/Utils/Autoload/Autoloader.php';
 
 // instantiate it ...
-$autoloader = new Utils\Autoload\Autoloader(SOURCE_FOLDER.'/');
+$autoloaderRT = new \ws\loewe\Utils\Autoload\Autoloader(SOURCE_FOLDER.'/', 'php');
+$autoloaderUtils = new \ws\loewe\Utils\Autoload\Autoloader(INSTALLATION_FOLDER.'/../Utils/src/', 'php');
 
 // ... and register it
-spl_autoload_register(array($autoloader, 'autoload'));
+spl_autoload_register(array($autoloaderRT, 'autoload'));
+spl_autoload_register(array($autoloaderUtils, 'autoload'));

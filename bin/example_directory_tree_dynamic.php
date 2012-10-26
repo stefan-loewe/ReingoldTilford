@@ -6,20 +6,14 @@
  * Just direct your browser to this file.
  */
 
-use Utils\Autoload\Autoloader;
-use ReingoldTilford\Algorithms\ReingoldTilfordAlgorithm;
-use ReingoldTilford\Models\FSTreeModel;
-use ReingoldTilford\Plotters\Plotter;
-use ReingoldTilford\Styles\TreeStyle;
-use Utils\Graphics2D\DrawingPanes\HtmlDrawingPane;
-use Utils\Graphics2D\Shapes\Styles\TextStyle;
-use Utils\Geom\Dimension;
-use Utils\File\Directory;
-use Utils\Font\FontManager;
-use Utils\Font\FontMetricServices\FontMetricServiceFactory;
-use Utils\URL\Url;
+use \ws\loewe\ReingoldTilford\Algorithms\ReingoldTilfordAlgorithm;
+use \ws\loewe\ReingoldTilford\Models\FSTreeModel;
+use \ws\loewe\ReingoldTilford\Plotters\Plotter;
+use \ws\loewe\ReingoldTilford\Styles\TreeStyle;
+use \ws\loewe\Utils\Graphics2D\DrawingPanes\HtmlDrawingPane;
+use \ws\loewe\Utils\File\Directory;
 
-require_once __DIR__.'/../app/bootstrap.inc';
+require_once __DIR__.'/../app/bootstrap.php';
 
 // get the directory information
 $rootDirectory = new Directory(new SplFileInfo(INSTALLATION_FOLDER));
@@ -33,9 +27,9 @@ $rootDirectory->expand(  function($current, $key, $innerIterator)
 $style = new TreeStyle();
 $style->shapeStyle->setWidth(8);
 $style->shapeStyle->setHeight(5);
-$style->shapeStyle->setColor(new \Utils\Color\RgbColor(251, 247, 180));
-$style->shapeStyle->border->setColor(new \Utils\Color\RgbColor(228, 212, 128));
-$style->edgeStyle->setColor(new \Utils\Color\RgbColor(200, 200, 200));
+$style->shapeStyle->setColor(new \ws\loewe\Utils\Color\RgbColor(251, 247, 180));
+$style->shapeStyle->border->setColor(new \ws\loewe\Utils\Color\RgbColor(228, 212, 128));
+$style->edgeStyle->setColor(new \ws\loewe\Utils\Color\RgbColor(200, 200, 200));
 
 // get a new instance of the algorithm
 $algorithm  = new ReingoldTilfordAlgorithm();

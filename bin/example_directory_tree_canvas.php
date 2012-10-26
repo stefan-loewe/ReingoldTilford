@@ -6,20 +6,18 @@
  * Just direct your browser to this file.
  */
 
-use Utils\Autoload\Autoloader;
-use ReingoldTilford\Algorithms\ReingoldTilfordAlgorithm;
-use ReingoldTilford\Models\FSTreeModel;
-use ReingoldTilford\Plotters\Plotter;
-use ReingoldTilford\Styles\TreeStyle;
-use Utils\Graphics2D\DrawingPanes\HtmlCanvasDrawingPane;
-use Utils\Graphics2D\Shapes\Styles\TextStyle;
-use Utils\Geom\Dimension;
-use Utils\File\Directory;
-use Utils\Font\FontManager;
-use Utils\Font\FontMetricServices\FontMetricServiceFactory;
-use Utils\URL\Url;
+use \ws\loewe\ReingoldTilford\Algorithms\ReingoldTilfordAlgorithm;
+use \ws\loewe\ReingoldTilford\Models\FSTreeModel;
+use \ws\loewe\ReingoldTilford\Plotters\Plotter;
+use \ws\loewe\ReingoldTilford\Styles\TreeStyle;
+use \ws\loewe\Utils\Graphics2D\DrawingPanes\HtmlCanvasDrawingPane;
+use \ws\loewe\Utils\Graphics2D\Shapes\Styles\TextStyle;
+use \ws\loewe\Utils\File\Directory;
+use \ws\loewe\Utils\Font\FontManager;
+use \ws\loewe\Utils\Font\FontMetricServices\FontMetricServiceFactory;
+use \ws\loewe\Utils\URL\Url;
 
-require_once __DIR__.'/../app/bootstrap.inc';
+require_once __DIR__.'/../app/bootstrap.php';
 
 // get the directory information
 $rootDirectory = new Directory(new SplFileInfo(INSTALLATION_FOLDER));

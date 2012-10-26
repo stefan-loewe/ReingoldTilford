@@ -6,16 +6,14 @@
  * Just direct your browser to this file.
  */
 
-use Utils\Autoload\Autoloader;
-use ReingoldTilford\Algorithms\ReingoldTilfordAlgorithm;
-use ReingoldTilford\Models\DomTreeModel;
-use ReingoldTilford\Plotters\Plotter;
-use ReingoldTilford\Styles\TreeStyle;
-use Utils\Graphics2D\DrawingPanes\SvgDrawingPane;
-use Utils\Geom\Dimension;
-use Utils\Color\RgbColor;
+use \ws\loewe\ReingoldTilford\Algorithms\ReingoldTilfordAlgorithm;
+use \ws\loewe\ReingoldTilford\Models\DomTreeModel;
+use \ws\loewe\ReingoldTilford\Plotters\Plotter;
+use \ws\loewe\ReingoldTilford\Styles\TreeStyle;
+use \ws\loewe\Utils\Graphics2D\DrawingPanes\SvgDrawingPane;
+use \ws\loewe\Utils\Color\RgbColor;
 
-require_once __DIR__.'/../app/bootstrap.inc';
+require_once __DIR__.'/../app/bootstrap.php';
 
 header("Content-type: image/svg+xml");
 

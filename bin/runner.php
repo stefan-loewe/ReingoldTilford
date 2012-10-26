@@ -1,32 +1,27 @@
 <?php
 
-use Utils\Autoload\Autoloader;
-use Utils\Tree\TreeNode;
-use Utils\Tree\DotTransformer;
-use ReingoldTilford\Models\ITreeModel;
-use ReingoldTilford\Models\TreeNodeTreeModel;
-use ReingoldTilford\Models\FSTreeModel;
-use ReingoldTilford\Algorithms\ReingoldTilfordAlgorithm;
-use ReingoldTilford\Plotters\Plotter;
-use ReingoldTilford\Styles\TreeStyle;
-use Utils\Graphics2D\Shapes\Styles\TextStyle;
-use Utils\Graphics2D\DrawingPanes\ImageDrawingPane;
-use Utils\Graphics2D\DrawingPanes\GdLibDrawingPane;
-use Utils\Graphics2D\DrawingPanes\ImagickDrawingPane;
-use Utils\Graphics2D\DrawingPanes\HtmlDrawingPane;
-use Utils\Graphics2D\DrawingPanes\HtmlMapDrawingPane;
-use Utils\Graphics2D\DrawingPanes\SvgDrawingPane;
-use Utils\Geom\Point;
-use Utils\Geom\Dimension;
-use Utils\File\FileSystemObject;
-use Utils\File\Directory;
-use Utils\File\File;
-use Utils\Font\FontManager;
-use Utils\Font\FontMetricServices\FontMetricServiceFactory;
-use Utils\URL\Url;
-use Utils\Logging\Logger;
+use \ws\loewe\Utils\Tree\TreeNode;
+use \ws\loewe\Utils\Tree\DotTransformer;
+use \ws\loewe\ReingoldTilford\Models\TreeNodeTreeModel;
+use \ws\loewe\ReingoldTilford\Algorithms\ReingoldTilfordAlgorithm;
+use \ws\loewe\ReingoldTilford\Plotters\Plotter;
+use \ws\loewe\ReingoldTilford\Styles\TreeStyle;
+use \ws\loewe\Utils\Graphics2D\Shapes\Styles\TextStyle;
+use \ws\loewe\Utils\Graphics2D\DrawingPanes\ImageDrawingPane;
+use \ws\loewe\Utils\Graphics2D\DrawingPanes\GdLibDrawingPane;
+use \ws\loewe\Utils\Graphics2D\DrawingPanes\ImagickDrawingPane;
+use \ws\loewe\Utils\Graphics2D\DrawingPanes\HtmlDrawingPane;
+use \ws\loewe\Utils\Graphics2D\DrawingPanes\HtmlMapDrawingPane;
+use \ws\loewe\Utils\Graphics2D\DrawingPanes\SvgDrawingPane;
+use \ws\loewe\Utils\Geom\Point;
+use \ws\loewe\Utils\File\FileSystemObject;
+use \ws\loewe\Utils\File\Directory;
+use \ws\loewe\Utils\Font\FontManager;
+use \ws\loewe\Utils\Font\FontMetricServices\FontMetricServiceFactory;
+use \ws\loewe\Utils\URL\Url;
+use \ws\loewe\Utils\Logging\Logger;
 
-require_once __DIR__.'/../app/bootstrap.inc';
+require_once __DIR__.'/../app/bootstrap.php';
 
 /*
  * TODO: keine verschiedenen Panes explizit erzeugen, sondern eine allgemeine, und dort Primitive hinzufügen, dann pane->save(HTML)->save(PNG);
@@ -236,81 +231,81 @@ var_dump(memory_get_peak_usage() / (1024 * 1024));
 /*
 $d = new SvgDrawingPane(200, 100);
 $d->setStrokeWidth(3)
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 255, 0))
-        ->drawLine(new \Utils\Geom\Point(5, 10), new \Utils\Geom\Point(55, 10))
-        ->drawLine(new \Utils\Geom\Point(57, 12), new \Utils\Geom\Point(57, 32))
-        ->drawLine(new \Utils\Geom\Point(55, 34), new \Utils\Geom\Point(5, 34))
-        ->drawLine(new \Utils\Geom\Point(3, 32), new \Utils\Geom\Point(3, 12));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 255, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(5, 10), new \ws\loewe\Utils\Geom\Point(55, 10))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(57, 12), new \ws\loewe\Utils\Geom\Point(57, 32))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(55, 34), new \ws\loewe\Utils\Geom\Point(5, 34))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(3, 32), new \ws\loewe\Utils\Geom\Point(3, 12));
 file_put_contents('test.svg', $d->save());
 
 $d = new GdLibDrawingPane(200, 100, ImageDrawingPane::GIF);
 $d->setStrokeWidth(3)
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 0))
-        ->drawLine(new \Utils\Geom\Point(5, 10), new \Utils\Geom\Point(55, 10))
-        ->drawLine(new \Utils\Geom\Point(57, 12), new \Utils\Geom\Point(57, 32))
-        ->drawLine(new \Utils\Geom\Point(55, 34), new \Utils\Geom\Point(5, 34))
-        ->drawLine(new \Utils\Geom\Point(3, 32), new \Utils\Geom\Point(3, 12));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(5, 10), new \ws\loewe\Utils\Geom\Point(55, 10))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(57, 12), new \ws\loewe\Utils\Geom\Point(57, 32))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(55, 34), new \ws\loewe\Utils\Geom\Point(5, 34))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(3, 32), new \ws\loewe\Utils\Geom\Point(3, 12));
 file_put_contents('test.gif', $d->save());
 
 $d = new SvgDrawingPane(300, 300);
 $d->setStrokeWidth(1)
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 0))
-        ->drawLine(new \Utils\Geom\Point(10, 10), new \Utils\Geom\Point(100, 50))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 10), new \ws\loewe\Utils\Geom\Point(100, 50))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 255, 0))
-        ->drawLine(new \Utils\Geom\Point(290, 290), new \Utils\Geom\Point(200, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 255, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 290), new \ws\loewe\Utils\Geom\Point(200, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(10, 290), new \Utils\Geom\Point(100, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 290), new \ws\loewe\Utils\Geom\Point(100, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(290, 10), new \Utils\Geom\Point(200, 50));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 10), new \ws\loewe\Utils\Geom\Point(200, 50));
 file_put_contents('test2.svg', $d->save());
 
 $d = new GdLibDrawingPane(300, 300, ImageDrawingPane::GIF);
 $d->setStrokeWidth(1)
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 0))
-        ->drawLine(new \Utils\Geom\Point(10, 10), new \Utils\Geom\Point(100, 50))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 10), new \ws\loewe\Utils\Geom\Point(100, 50))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 255, 0))
-        ->drawLine(new \Utils\Geom\Point(290, 290), new \Utils\Geom\Point(200, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 255, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 290), new \ws\loewe\Utils\Geom\Point(200, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(10, 290), new \Utils\Geom\Point(100, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 290), new \ws\loewe\Utils\Geom\Point(100, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(290, 10), new \Utils\Geom\Point(200, 50));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 10), new \ws\loewe\Utils\Geom\Point(200, 50));
 file_put_contents('test2.gif', $d->save());
 file_put_contents('test2.html', '<style>*{margin:0px;}</style><img src="test2.gif">');
 
 $d = new SvgDrawingPane(300, 300);
 $d->setStrokeWidth(3)
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 0))
-        ->drawLine(new \Utils\Geom\Point(10, 10), new \Utils\Geom\Point(100, 50))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 10), new \ws\loewe\Utils\Geom\Point(100, 50))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 255, 0))
-        ->drawLine(new \Utils\Geom\Point(290, 290), new \Utils\Geom\Point(200, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 255, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 290), new \ws\loewe\Utils\Geom\Point(200, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(10, 290), new \Utils\Geom\Point(100, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 290), new \ws\loewe\Utils\Geom\Point(100, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(290, 10), new \Utils\Geom\Point(200, 50));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 10), new \ws\loewe\Utils\Geom\Point(200, 50));
 file_put_contents('test3.svg', $d->save());
 
 $d = new GdLibDrawingPane(300, 300, ImageDrawingPane::GIF);
 $d->setStrokeWidth(3)
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 0))
-        ->drawLine(new \Utils\Geom\Point(10, 10), new \Utils\Geom\Point(100, 50))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 10), new \ws\loewe\Utils\Geom\Point(100, 50))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 255, 0))
-        ->drawLine(new \Utils\Geom\Point(290, 290), new \Utils\Geom\Point(200, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 255, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 290), new \ws\loewe\Utils\Geom\Point(200, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(10, 290), new \Utils\Geom\Point(100, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 290), new \ws\loewe\Utils\Geom\Point(100, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(290, 10), new \Utils\Geom\Point(200, 50));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 10), new \ws\loewe\Utils\Geom\Point(200, 50));
 file_put_contents('test3.gif', $d->save());
 file_put_contents('test3.html', '<style>*{margin:0px;}</style><img src="test3.gif">');
 */
@@ -318,83 +313,83 @@ file_put_contents('test3.html', '<style>*{margin:0px;}</style><img src="test3.gi
 /*
 $d = new SvgDrawingPane(200, 100);
 $d->setStrokeWidth(1)
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 255, 0))
-        ->drawLine(new \Utils\Geom\Point(5, 10), new \Utils\Geom\Point(55, 10))
-        ->drawLine(new \Utils\Geom\Point(57, 12), new \Utils\Geom\Point(57, 32))
-        ->drawLine(new \Utils\Geom\Point(55, 34), new \Utils\Geom\Point(5, 34))
-        ->drawLine(new \Utils\Geom\Point(3, 32), new \Utils\Geom\Point(3, 12));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 255, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(5, 10), new \ws\loewe\Utils\Geom\Point(55, 10))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(57, 12), new \ws\loewe\Utils\Geom\Point(57, 32))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(55, 34), new \ws\loewe\Utils\Geom\Point(5, 34))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(3, 32), new \ws\loewe\Utils\Geom\Point(3, 12));
 file_put_contents('test0.svg', $d->save());
 
 $d = new ImagickDrawingPane(200, 100);
 $d->setStrokeWidth(1)
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 0))
-        ->drawLine(new \Utils\Geom\Point(5, 10), new \Utils\Geom\Point(55, 10))
-        ->drawLine(new \Utils\Geom\Point(57, 12), new \Utils\Geom\Point(57, 32))
-        ->drawLine(new \Utils\Geom\Point(55, 34), new \Utils\Geom\Point(5, 34))
-        ->drawLine(new \Utils\Geom\Point(3, 32), new \Utils\Geom\Point(3, 12));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(5, 10), new \ws\loewe\Utils\Geom\Point(55, 10))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(57, 12), new \ws\loewe\Utils\Geom\Point(57, 32))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(55, 34), new \ws\loewe\Utils\Geom\Point(5, 34))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(3, 32), new \ws\loewe\Utils\Geom\Point(3, 12));
 file_put_contents('test0.png', $d->save());
 file_put_contents('test0.html', '<style>*{margin:0px;}</style><img src="test0.png">');
 
 
 $d = new SvgDrawingPane(300, 300);
 $d->setStrokeWidth(2)
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 0))
-        ->drawLine(new \Utils\Geom\Point(10, 10), new \Utils\Geom\Point(100, 50))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 10), new \ws\loewe\Utils\Geom\Point(100, 50))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 255, 0))
-        ->drawLine(new \Utils\Geom\Point(290, 290), new \Utils\Geom\Point(200, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 255, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 290), new \ws\loewe\Utils\Geom\Point(200, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(10, 290), new \Utils\Geom\Point(100, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 290), new \ws\loewe\Utils\Geom\Point(100, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(290, 10), new \Utils\Geom\Point(200, 50));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 10), new \ws\loewe\Utils\Geom\Point(200, 50));
 file_put_contents('test2.svg', $d->save());
 
 $d = new ImagickDrawingPane(300, 300);
 $d->setStrokeWidth(1)
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 0))
-        ->drawLine(new \Utils\Geom\Point(10, 10), new \Utils\Geom\Point(100, 50))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 10), new \ws\loewe\Utils\Geom\Point(100, 50))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 255, 0))
-        ->drawLine(new \Utils\Geom\Point(290, 290), new \Utils\Geom\Point(200, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 255, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 290), new \ws\loewe\Utils\Geom\Point(200, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(10, 290), new \Utils\Geom\Point(100, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 290), new \ws\loewe\Utils\Geom\Point(100, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(290, 10), new \Utils\Geom\Point(200, 50));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 10), new \ws\loewe\Utils\Geom\Point(200, 50));
 file_put_contents('test2.png', $d->save());
 file_put_contents('test2.html', '<style>*{margin:0px;}</style><img src="test2.png">');
 
 $d = new SvgDrawingPane(300, 300);
 $d->setStrokeWidth(4)
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 0))
-        ->drawLine(new \Utils\Geom\Point(10, 10), new \Utils\Geom\Point(100, 50))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 10), new \ws\loewe\Utils\Geom\Point(100, 50))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 255, 0))
-        ->drawLine(new \Utils\Geom\Point(290, 290), new \Utils\Geom\Point(200, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 255, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 290), new \ws\loewe\Utils\Geom\Point(200, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(10, 290), new \Utils\Geom\Point(100, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 290), new \ws\loewe\Utils\Geom\Point(100, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(290, 10), new \Utils\Geom\Point(200, 50));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 10), new \ws\loewe\Utils\Geom\Point(200, 50));
 file_put_contents('test3.svg', $d->save());
 
 $d = new ImagickDrawingPane(300, 300);
 $d->setStrokeWidth(3)
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 0))
-        ->drawLine(new \Utils\Geom\Point(10, 10), new \Utils\Geom\Point(100, 50))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 10), new \ws\loewe\Utils\Geom\Point(100, 50))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 255, 0))
-        ->drawLine(new \Utils\Geom\Point(290, 290), new \Utils\Geom\Point(200, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 255, 0))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 290), new \ws\loewe\Utils\Geom\Point(200, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(0, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(10, 290), new \Utils\Geom\Point(100, 250))
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(0, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(10, 290), new \ws\loewe\Utils\Geom\Point(100, 250))
 
-        ->setStrokeColor(new \Utils\Color\RgbColor(255, 0, 255))
-        ->drawLine(new \Utils\Geom\Point(290, 10), new \Utils\Geom\Point(200, 50));
+        ->setStrokeColor(new \ws\loewe\Utils\Color\RgbColor(255, 0, 255))
+        ->drawLine(new \ws\loewe\Utils\Geom\Point(290, 10), new \ws\loewe\Utils\Geom\Point(200, 50));
 file_put_contents('test3.png', $d->save());
 file_put_contents('test3.html', '<style>*{margin:0px;}</style><img src="test3.png">');
 */

@@ -5,10 +5,10 @@
  * There is no use in calling this script directly, neither by a web server nor through cli.
  */
 
-use Utils\Autoload\Autoloader;
-use Utils\Graphics2D\Shapes\Styles\TextStyle;
-use Utils\Font\FontManager;
-use Utils\Font\FontMetric;
+use \ws\loewe\Utils\Autoload\Autoloader;
+use \ws\loewe\Utils\Graphics2D\Shapes\Styles\TextStyle;
+use \ws\loewe\Utils\Font\FontManager;
+use \ws\loewe\Utils\Font\FontMetric;
 
 require_once __DIR__.'/../app/bootstrap.inc';
 
