@@ -17,10 +17,10 @@ use \ws\loewe\Utils\Font\FontManager;
 use \ws\loewe\Utils\Font\FontMetricServices\FontMetricServiceFactory;
 use \ws\loewe\Utils\URL\Url;
 
-require_once __DIR__.'/../app/bootstrap.php';
+require __DIR__.'/../vendor/autoload.php';
 
 // get the directory information
-$rootDirectory = new Directory(new SplFileInfo(INSTALLATION_FOLDER));
+$rootDirectory = new Directory(new \SplFileInfo(__DIR__.'/../'));
 
 $rootDirectory->expand(  function($current, $key, $innerIterator)
                 {

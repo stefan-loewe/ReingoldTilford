@@ -12,7 +12,7 @@ use \ws\loewe\ReingoldTilford\Plotters\Plotter;
 use \ws\loewe\ReingoldTilford\Styles\TreeStyle;
 use \ws\loewe\Utils\Graphics2D\DrawingPanes\SvgDrawingPane;
 
-require_once __DIR__.'/../app/bootstrap.php';
+require __DIR__.'/../vendor/autoload.php';
 
 $start = microtime(TRUE);
 

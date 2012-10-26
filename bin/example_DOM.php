@@ -13,7 +13,10 @@ use \ws\loewe\ReingoldTilford\Styles\TreeStyle;
 use \ws\loewe\Utils\Graphics2D\DrawingPanes\SvgDrawingPane;
 use \ws\loewe\Utils\Color\RgbColor;
 
-require_once __DIR__.'/../app/bootstrap.php';
+require __DIR__.'/../vendor/autoload.php';
+
+// path to the data folder
+define('DATA_FOLDER', '../data');
 
 header("Content-type: image/svg+xml");
 

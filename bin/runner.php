@@ -21,7 +21,7 @@ use \ws\loewe\Utils\Font\FontMetricServices\FontMetricServiceFactory;
 use \ws\loewe\Utils\URL\Url;
 use \ws\loewe\Utils\Logging\Logger;
 
-require_once __DIR__.'/../app/bootstrap.php';
+require __DIR__.'/../vendor/autoload.php';
 
 /*
  * TODO: keine verschiedenen Panes explizit erzeugen, sondern eine allgemeine, und dort Primitive hinzufügen, dann pane->save(HTML)->save(PNG);

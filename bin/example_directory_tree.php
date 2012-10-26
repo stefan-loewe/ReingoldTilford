@@ -17,6 +17,8 @@ use \ws\loewe\Utils\Font\FontManager;
 use \ws\loewe\Utils\Font\FontMetricServices\FontMetricServiceFactory;
 use \ws\loewe\Utils\URL\Url;
 
+require __DIR__.'/../vendor/autoload.php';
+
 // this example only runs through a web server
 if(PHP_SAPI === 'cli')
 {
@@ -24,10 +26,8 @@ if(PHP_SAPI === 'cli')
     exit(-1);
 }
 
-require_once __DIR__.'/../app/bootstrap.php';
-
 // get the directory information
-$rootDirectory = new Directory(new SplFileInfo(INSTALLATION_FOLDER));
+$rootDirectory = new Directory(new \SplFileInfo(__DIR__.'/../'));
 
 $rootDirectory->expand(  function($current, $key, $innerIterator)
                 {

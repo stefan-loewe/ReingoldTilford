@@ -13,10 +13,10 @@ use \ws\loewe\ReingoldTilford\Styles\TreeStyle;
 use \ws\loewe\Utils\Graphics2D\DrawingPanes\HtmlDrawingPane;
 use \ws\loewe\Utils\File\Directory;
 
-require_once __DIR__.'/../app/bootstrap.php';
+require __DIR__.'/../vendor/autoload.php';
 
 // get the directory information
-$rootDirectory = new Directory(new SplFileInfo(INSTALLATION_FOLDER));
+$rootDirectory = new Directory(new \SplFileInfo(__DIR__.'/../'));
 
 $rootDirectory->expand(  function($current, $key, $innerIterator)
                 {

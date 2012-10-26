@@ -1,0 +1,17 @@
+{
+    "name": "ws/loewe/ReingoldTilford",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/stefan-loewe/Utils"
+        }
+    ],
+    "require": {
+        "ws/loewe/Utils": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+          "ws\\loewe\\ReingoldTilford": "src/"
+        }
+    }
+}

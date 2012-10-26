@@ -10,7 +10,7 @@ use \ws\loewe\Utils\Graphics2D\Shapes\Styles\TextStyle;
 use \ws\loewe\Utils\Font\FontManager;
 use \ws\loewe\Utils\Font\FontMetric;
 
-require_once __DIR__.'/../app/bootstrap.inc';
+require __DIR__.'/../vendor/autoload.php';
 
 $result = '';
 
