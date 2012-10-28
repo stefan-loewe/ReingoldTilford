@@ -22,11 +22,11 @@ require __DIR__.'/../vendor/autoload.php';
 // get the directory information
 $rootDirectory = new Directory(new \SplFileInfo(__DIR__.'/../'));
 
-$rootDirectory->expand(  function($current, $key, $innerIterator)
-                {
+// but filter out all hidden files, i.e. those starting with a dot
+$filter = function($current, $key, $innerIterator) {
                     return strpos($current->getFilename(), '.') !== 0;
-                });
-$basenames  = getFilenames($rootDirectory);
+                };
+$rootDirectory->expand($filter);
 
 // get the default style for a tree
 $style      = new TreeStyle();
@@ -94,4 +94,3 @@ function getFilenames(Directory $root)
 
     return $basenames;
 }
-

@@ -18,10 +18,11 @@ require __DIR__.'/../vendor/autoload.php';
 // get the directory information
 $rootDirectory = new Directory(new \SplFileInfo(__DIR__.'/../'));
 
-$rootDirectory->expand(  function($current, $key, $innerIterator)
-                {
-                    return true;
-                });
+// but filter out all hidden files, i.e. those starting with a dot
+$filter = function($current, $key, $innerIterator) {
+                    return strpos($current->getFilename(), '.') !== 0;
+                };
+$rootDirectory->expand($filter);
 
 // get the default style for a tree
 $style = new TreeStyle();
@@ -58,7 +59,7 @@ echo $document->save();
 /**
  * This helper method prints the html head, e.g. the CSS styles in use.
  */
-function printHtmlHead(TreeStyle $treeStyle)
+function printHtmlHead()
 {
     echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"'.PHP_EOL.
        '"http://www.w3.org/TR/html4/loose.dtd">'.PHP_EOL.

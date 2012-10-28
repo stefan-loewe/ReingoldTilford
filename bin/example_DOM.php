@@ -71,4 +71,3 @@ function getHtmlBodyElement($url)
 
     return $domDocument->getElementsByTagName('body')->item(0);
 }
-

@@ -29,10 +29,12 @@ if(PHP_SAPI === 'cli')
 // get the directory information
 $rootDirectory = new Directory(new \SplFileInfo(__DIR__.'/../'));
 
-$rootDirectory->expand(  function($current, $key, $innerIterator)
-                {
+// but filter out all hidden files, i.e. those starting with a dot
+$filter = function($current, $key, $innerIterator) {
                     return strpos($current->getFilename(), '.') !== 0;
-                });
+                };
+$rootDirectory->expand($filter);
+
 $basenames  = getFilenames($rootDirectory);
 
 // get the default style for a tree
