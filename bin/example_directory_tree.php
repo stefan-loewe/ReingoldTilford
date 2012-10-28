@@ -30,7 +30,7 @@ if(PHP_SAPI === 'cli')
 $rootDirectory = new Directory(new \SplFileInfo(__DIR__.'/../'));
 
 // but filter out all hidden files, i.e. those starting with a dot
-$filter = function($current, $key, $innerIterator) {
+$filter = function($current) {
                     return strpos($current->getFilename(), '.') !== 0;
                 };
 $rootDirectory->expand($filter);

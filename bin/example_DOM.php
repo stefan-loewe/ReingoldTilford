@@ -15,9 +15,6 @@ use \ws\loewe\Utils\Color\RgbColor;
 
 require __DIR__.'/../vendor/autoload.php';
 
-// path to the data folder
-define('DATA_FOLDER', '../data');
-
 header("Content-type: image/svg+xml");
 
 $htmlBody = getHtmlBodyElement('http://www.phpclasses.org/');
