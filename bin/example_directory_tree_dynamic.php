@@ -16,7 +16,7 @@ use \ws\loewe\Utils\File\Directory;
 require __DIR__.'/../vendor/autoload.php';
 
 // get the directory information
-$rootDirectory = new Directory(new \SplFileInfo(__DIR__.'/../'));
+$rootDirectory = new Directory(new \SplFileInfo(realpath(__DIR__.'/../')));
 
 // but filter out all hidden files, i.e. those starting with a dot
 $filter = function($current) {
