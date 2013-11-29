@@ -416,11 +416,11 @@ class ReingoldTilfordAlgorithm
 
         // calculate the absolute offsets from the relative shifts
         $offsets = new \SplObjectStorage();
-        $offsets[$this->root] = new Point(0, 0);
+        $offsets[$this->root] = Point::createInstance(0, 0);
         foreach($this->getPreOrderEnumeration() as $node)
         {
             if($node !== $this->root)
-                $offsets[$node] = $offsets[$this->parents[$node]]->moveBy(new Dimension($this->offsets[$node], 1));
+                $offsets[$node] = $offsets[$this->parents[$node]]->moveBy(Dimension::createInstance($this->offsets[$node], 1));
         }
 
         return new Layout($offsets);

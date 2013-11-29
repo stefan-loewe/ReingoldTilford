@@ -47,7 +47,7 @@ class Layout implements \Iterator
         if($minXPoint !== null)
         {
             foreach($this->coordinates as $node)
-                $this->coordinates[$node] = $this->coordinates[$node]->moveBy(new Dimension(-$minXPoint->x, 0));
+                $this->coordinates[$node] = $this->coordinates[$node]->moveBy(Dimension::createInstance(-$minXPoint->x, 0));
         }
 
         return $this;
@@ -74,7 +74,7 @@ class Layout implements \Iterator
             $maxY = max($maxY, $currentY + ($treeStyle->shapeStyle->height + ($treeStyle->shapeStyle->border->width * 1) + $treeStyle->yPadding));
         }
 
-        return new Dimension($maxX, $maxY);
+        return Dimension::createInstance($maxX, $maxY);
     }
 
     /**
@@ -86,7 +86,7 @@ class Layout implements \Iterator
      */
     public function getPosition($node, TreeStyle $treeStyle)
     {
-        return new Point($this->getXCoordinate($node, $treeStyle), $this->getYCoordinate($node, $treeStyle));
+        return Point::createInstance($this->getXCoordinate($node, $treeStyle), $this->getYCoordinate($node, $treeStyle));
     }
 
     /**
